@@ -1,0 +1,526 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Histogram Equalization</TITLE>
+<META NAME="description" CONTENT="Histogram Equalization">
+<META NAME="keywords" CONTENT="contrast_transform">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="contrast_transform.css">
+
+<LINK REL="next" HREF="node3.html">
+<LINK REL="previous" HREF="node1.html">
+<LINK REL="up" HREF="contrast_transform.html">
+<LINK REL="next" HREF="node3.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html26"
+  HREF="node3.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/opt/local/share/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html24"
+  HREF="contrast_transform.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/opt/local/share/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html18"
+  HREF="node1.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/opt/local/share/lib/latex2html/icons/prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html27"
+  HREF="node3.html">Histogram Specification</A>
+<B> Up:</B> <A NAME="tex2html25"
+  HREF="contrast_transform.html">contrast_transform</A>
+<B> Previous:</B> <A NAME="tex2html19"
+  HREF="node1.html">Gray level mapping</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00002000000000000000">
+Histogram Equalization</A>
+</H2>
+
+<P>
+To transform the gray levels of the image so that the histogram of the 
+resulting image is equalized to become a constant: 
+<BR><P></P>
+<DIV ALIGN="CENTER">
+<!-- MATH
+ \begin{displaymath}
+h[i]= \mbox{constant},\;\;\;\;\;\;0\le i\le L-1
+\end{displaymath}
+ -->
+
+<IMG
+ WIDTH="271" HEIGHT="33" BORDER="0"
+ SRC="img41.png"
+ ALT="\begin{displaymath}
+h[i]= \mbox{constant},\;\;\;\;\;\;0\le i\le L-1
+\end{displaymath}">
+</DIV>
+<BR CLEAR="ALL">
+<P></P>
+
+<P>
+The purposes:
+
+<UL>
+<LI>to equally make use of all available gray levels in the dynamic range;
+</LI>
+<LI>for further histogram specification.
+</LI>
+</UL>
+
+<P>
+We first assume the pixel values are continuous in the range of <IMG
+ WIDTH="84" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img42.png"
+ ALT="$0&lt;x&lt;1$">, and
+the mapping function <IMG
+ WIDTH="76" HEIGHT="37" ALIGN="MIDDLE" BORDER="0"
+ SRC="img18.png"
+ ALT="$y=f(x)$"> maps <IMG
+ WIDTH="15" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img43.png"
+ ALT="$x$"> to <IMG
+ WIDTH="14" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img44.png"
+ ALT="$y$"> also in the same range. We 
+also assume all pixels within the gray scale interval <IMG
+ WIDTH="25" HEIGHT="20" ALIGN="BOTTOM" BORDER="0"
+ SRC="img45.png"
+ ALT="$dx$"> of the input image
+are mapped to the corresponding range <IMG
+ WIDTH="24" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img46.png"
+ ALT="$dy$"> of the output image. As the number
+of pixels being mapped remains unchanged, we have
+<BR><P></P>
+<DIV ALIGN="CENTER">
+<!-- MATH
+ \begin{displaymath}
+p(y)dy=p(x)dx
+\end{displaymath}
+ -->
+
+<IMG
+ WIDTH="346" HEIGHT="33" BORDER="0"
+ SRC="img47.png"
+ ALT="\begin{displaymath}p(y)dy=p(x)dx \end{displaymath}">
+</DIV>
+<BR CLEAR="ALL">
+<P></P>
+
+<P>
+<IMG
+ ALIGN="BOTTOM" BORDER="0" SRC="../equalize.gif"
+ ALT="equalize.gif">
+
+<P>
+For the histogram of the output image to be equalized, it needs to be
+constant 1, i.e., <IMG
+ WIDTH="73" HEIGHT="37" ALIGN="MIDDLE" BORDER="0"
+ SRC="img48.png"
+ ALT="$p(y)=1$">, so that 
+<BR><P></P>
+<DIV ALIGN="CENTER">
+<!-- MATH
+ \begin{displaymath}
+\int_0^1 p(x)\;dx=\int_0^1 dy=1
+\end{displaymath}
+ -->
+
+<IMG
+ WIDTH="191" HEIGHT="46" BORDER="0"
+ SRC="img49.png"
+ ALT="\begin{displaymath}
+\int_0^1 p(x)\;dx=\int_0^1 dy=1
+\end{displaymath}">
+</DIV>
+<BR CLEAR="ALL">
+<P></P>
+We therefore have:
+<BR><P></P>
+<DIV ALIGN="CENTER">
+<!-- MATH
+ \begin{displaymath}
+p(y)dy=dy=p(x)dx,\;\;\;\mbox{or}\;\;\;\frac{dy}{dx}=p(x)
+\end{displaymath}
+ -->
+
+<IMG
+ WIDTH="319" HEIGHT="46" BORDER="0"
+ SRC="img50.png"
+ ALT="\begin{displaymath}
+p(y)dy=dy=p(x)dx,\;\;\;\mbox{or}\;\;\;\frac{dy}{dx}=p(x)
+\end{displaymath}">
+</DIV>
+<BR CLEAR="ALL">
+<P></P>
+Integrating both sides, we get the mapping function <IMG
+ WIDTH="76" HEIGHT="37" ALIGN="MIDDLE" BORDER="0"
+ SRC="img18.png"
+ ALT="$y=f(x)$"> for the 
+histogram equalization:
+<BR><P></P>
+<DIV ALIGN="CENTER">
+<!-- MATH
+ \begin{displaymath}
+y=f(x)=\int_0^x p(u) du=P(x)-P(0)=P(x)
+\end{displaymath}
+ -->
+
+<IMG
+ WIDTH="369" HEIGHT="42" BORDER="0"
+ SRC="img51.png"
+ ALT="\begin{displaymath}y=f(x)=\int_0^x p(u) du=P(x)-P(0)=P(x) \end{displaymath}">
+</DIV>
+<BR CLEAR="ALL">
+<P></P>
+where <IMG
+ WIDTH="44" HEIGHT="37" ALIGN="MIDDLE" BORDER="0"
+ SRC="img52.png"
+ ALT="$P(x)$"> is the cumulative distribution of the gray levels of the 
+input image:
+<BR><P></P>
+<DIV ALIGN="CENTER">
+<!-- MATH
+ \begin{displaymath}
+P(x)=\int_0^x p(u) du, \;\;\;\;\;P(0)=0,\;\;\;\;\;\;P(1)=1
+\end{displaymath}
+ -->
+
+<IMG
+ WIDTH="367" HEIGHT="42" BORDER="0"
+ SRC="img53.png"
+ ALT="\begin{displaymath}P(x)=\int_0^x p(u) du, \;\;\;\;\;P(0)=0,\;\;\;\;\;\;P(1)=1 \end{displaymath}">
+</DIV>
+<BR CLEAR="ALL">
+<P></P>
+
+<P>
+This histogram equalization mapping can be intuitively interpreted by 
+the following:
+
+<UL>
+<LI>If <IMG
+ WIDTH="39" HEIGHT="37" ALIGN="MIDDLE" BORDER="0"
+ SRC="img54.png"
+ ALT="$p(x)$"> is low, <IMG
+ WIDTH="44" HEIGHT="37" ALIGN="MIDDLE" BORDER="0"
+ SRC="img52.png"
+ ALT="$P(x)$"> has a shallow slope, <IMG
+ WIDTH="24" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img46.png"
+ ALT="$dy$"> will be narrow,
+	causing <IMG
+ WIDTH="38" HEIGHT="37" ALIGN="MIDDLE" BORDER="0"
+ SRC="img55.png"
+ ALT="$p(y)$"> to be high, to keep <IMG
+ WIDTH="138" HEIGHT="37" ALIGN="MIDDLE" BORDER="0"
+ SRC="img56.png"
+ ALT="$p(y)dy=p(x)dx$">;
+</LI>
+<LI>If <IMG
+ WIDTH="39" HEIGHT="37" ALIGN="MIDDLE" BORDER="0"
+ SRC="img54.png"
+ ALT="$p(x)$"> is high, <IMG
+ WIDTH="44" HEIGHT="37" ALIGN="MIDDLE" BORDER="0"
+ SRC="img52.png"
+ ALT="$P(x)$"> has a steep slope, <IMG
+ WIDTH="24" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img46.png"
+ ALT="$dy$"> will be wide, 
+	causing <IMG
+ WIDTH="38" HEIGHT="37" ALIGN="MIDDLE" BORDER="0"
+ SRC="img55.png"
+ ALT="$p(y)$"> to be low, to keep <IMG
+ WIDTH="138" HEIGHT="37" ALIGN="MIDDLE" BORDER="0"
+ SRC="img56.png"
+ ALT="$p(y)dy=p(x)dx$">.
+</LI>
+</UL>
+
+<P>
+<IMG
+ ALIGN="BOTTOM" BORDER="0" SRC="../equalize1.gif"
+ ALT="equalize1.gif">
+
+<P>
+For discrete gray levels, the gray level of the input <IMG
+ WIDTH="15" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img43.png"
+ ALT="$x$"> takes one of 
+the <IMG
+ WIDTH="17" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img16.png"
+ ALT="$L$"> discrete values: <IMG
+ WIDTH="88" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img57.png"
+ ALT="$0\le x &lt; L$">, and the continuous mapping function
+becomes discrete:
+<BR><P></P>
+<DIV ALIGN="CENTER">
+<!-- MATH
+ \begin{displaymath}
+y'[j]=H_x[j]\stackrel{\triangle}{=}\sum_{i=0}^j h_x[i]
+\end{displaymath}
+ -->
+
+<IMG
+ WIDTH="187" HEIGHT="59" BORDER="0"
+ SRC="img58.png"
+ ALT="\begin{displaymath}
+y'[j]=H_x[j]\stackrel{\triangle}{=}\sum_{i=0}^j h_x[i]
+\end{displaymath}">
+</DIV>
+<BR CLEAR="ALL">
+<P></P>
+where <IMG
+ WIDTH="40" HEIGHT="39" ALIGN="MIDDLE" BORDER="0"
+ SRC="img59.png"
+ ALT="$h_x[i]$"> and <IMG
+ WIDTH="48" HEIGHT="39" ALIGN="MIDDLE" BORDER="0"
+ SRC="img60.png"
+ ALT="$H_x[j]$"> are respectively the density and cumulative
+histogram of the input image <IMG
+ WIDTH="15" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img43.png"
+ ALT="$x$">:
+<BR><P></P>
+<DIV ALIGN="CENTER">
+<!-- MATH
+ \begin{displaymath}
+h_x[i]=\frac{n_i}{\sum_{i=0}^{L-1} n_i}=\frac{n_i}{N},\;\;\;\;\;\;\;
+H_x[j]=\sum_{i=0}^j h_x[i],\;\;\;\;\;\;H_x[L-1]=\sum_{i=0}^{L-1} h_x[i]=1
+\end{displaymath}
+ -->
+
+<IMG
+ WIDTH="585" HEIGHT="59" BORDER="0"
+ SRC="img61.png"
+ ALT="\begin{displaymath}
+h_x[i]=\frac{n_i}{\sum_{i=0}^{L-1} n_i}=\frac{n_i}{N},\;\;\;...
+...{i=0}^j h_x[i],\;\;\;\;\;\;H_x[L-1]=\sum_{i=0}^{L-1} h_x[i]=1
+\end{displaymath}">
+</DIV>
+<BR CLEAR="ALL">
+<P></P>
+and <IMG
+ WIDTH="21" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img6.png"
+ ALT="$n_i$"> is the number of pixels with gray level <IMG
+ WIDTH="11" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$i$">, and <IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img62.png"
+ ALT="$N$"> is the 
+total number of pixels.
+
+<P>
+The resulting function <IMG
+ WIDTH="19" HEIGHT="37" ALIGN="MIDDLE" BORDER="0"
+ SRC="img63.png"
+ ALT="$y'$"> in the range <!-- MATH
+ $0 \le y' \le 1$
+ -->
+<IMG
+ WIDTH="89" HEIGHT="37" ALIGN="MIDDLE" BORDER="0"
+ SRC="img64.png"
+ ALT="$0 \le y' \le 1$"> needs to be 
+converted to the gray levels <IMG
+ WIDTH="87" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img65.png"
+ ALT="$0 \le y &lt;L$"> by either of the two ways:
+
+<OL>
+<LI>
+<BR><P></P>
+<DIV ALIGN="CENTER">
+<!-- MATH
+ \begin{displaymath}
+y_1=\lfloor (L-1)\;y' +0.5 \rfloor
+\end{displaymath}
+ -->
+
+<IMG
+ WIDTH="183" HEIGHT="33" BORDER="0"
+ SRC="img66.png"
+ ALT="\begin{displaymath}y_1=\lfloor (L-1)\;y' +0.5 \rfloor \end{displaymath}">
+</DIV>
+<BR CLEAR="ALL">
+<P></P>
+</LI>
+<LI>
+<BR><P></P>
+<DIV ALIGN="CENTER">
+<!-- MATH
+ \begin{displaymath}
+y_2=\lfloor (L-1) \;\frac{y'-y'_{min}}{1-y'_{min}}+0.5 \rfloor
+\end{displaymath}
+ -->
+
+<IMG
+ WIDTH="245" HEIGHT="51" BORDER="0"
+ SRC="img67.png"
+ ALT="\begin{displaymath}y_2=\lfloor (L-1) \;\frac{y'-y'_{min}}{1-y'_{min}}+0.5 \rfloor \end{displaymath}">
+</DIV>
+<BR CLEAR="ALL">
+<P></P>
+</LI>
+</OL>
+where <!-- MATH
+ $\lfloor w \rfloor$
+ -->
+<IMG
+ WIDTH="35" HEIGHT="39" ALIGN="MIDDLE" BORDER="0"
+ SRC="img68.png"
+ ALT="$\lfloor w \rfloor$"> is the floor of a real number <IMG
+ WIDTH="18" HEIGHT="19" ALIGN="BOTTOM" BORDER="0"
+ SRC="img69.png"
+ ALT="$w$"> (the largest 
+integer smaller than <IMG
+ WIDTH="18" HEIGHT="19" ALIGN="BOTTOM" BORDER="0"
+ SRC="img69.png"
+ ALT="$w$">), and adding <IMG
+ WIDTH="29" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img70.png"
+ ALT="$0.5$"> is for proper rounding. Note 
+that both conversions map <IMG
+ WIDTH="76" HEIGHT="37" ALIGN="MIDDLE" BORDER="0"
+ SRC="img71.png"
+ ALT="$y'_{max}=1$"> to the highest gray level <IMG
+ WIDTH="50" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img29.png"
+ ALT="$L-1$">, but
+the second conversion also maps <IMG
+ WIDTH="39" HEIGHT="37" ALIGN="MIDDLE" BORDER="0"
+ SRC="img72.png"
+ ALT="$y'_{min}$"> to 0 to stretch the gray levels 
+of the output image to occupy the entire dynamic range <IMG
+ WIDTH="87" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img65.png"
+ ALT="$0 \le y &lt;L$">; i.e., 
+the second method does gray scale stretch as well as histogram equalization.
+
+<P>
+<B>Example:</B>
+
+<P>
+Assume the images have <!-- MATH
+ $N=64 \times 64=4096$
+ -->
+<IMG
+ WIDTH="170" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img73.png"
+ ALT="$N=64 \times 64=4096$"> pixels in <IMG
+ WIDTH="52" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img74.png"
+ ALT="$L=8$"> gray levels. 
+The following table shows the equalization process corresponding to the
+two conversion methods above:
+
+<P>
+<BR><P></P>
+<DIV ALIGN="CENTER">
+<!-- MATH
+ \begin{displaymath}
+\begin{array}{c|c||c|c||c|c|c||c|c|c} \hline 
+x_i=i	& n_i	& h[i]=n_i/N	& y'=H[i]              & y_1    & h_1    & H_1   & y_2   & h_2 & H_2 \\\hline
+ 0	& 790	& 0.19  & 0.19	& 0.19\times 7\approx 1& 0.19	& 0.19	& 0	& 0.19	& 0.19	\\
+ 1	& 1023	& 0.25	& 0.44	& 0.44\times 7\approx 3& 0.25	& 0.44	& 2	& 0.25	& 0.44	\\
+ 2	& 850	& 0.21	& 0.65	& 0.65\times 7\approx 5& 0.21	& 0.65	& 4	& 0.21	& 0.65	\\
+ 3	& 656	& 0.16	& 0.81	& 0.81\times 7\approx 6&	&	& 5	& 0.16	& 0.81	\\
+ 4	& 329	& 0.08	& 0.89	& 0.89\times 7\approx 6& 0.24	& 0.89	& 6	& 0.08	& 0.89	\\
+ 5	& 245	& 0.06	& 0.95	& 0.95\times 7\approx 7&	&	& 7	&	&	\\
+ 6	& 122	& 0.03	& 0.98	& 0.98\times 7\approx 7& 	&	& 7	& 	&	\\
+ 7	& 81	& 0.02	& 1.00	& 1.00\times 7=7       & 0.11	& 1.00	& 7	& 0.11	& 1.00	\\\hline
+\end{array}
+\end{displaymath}
+ -->
+
+<IMG
+ WIDTH="672" HEIGHT="216" BORDER="0"
+ SRC="img75.png"
+ ALT="\begin{displaymath}
+\begin{array}{c\vert c\vert\vert c\vert c\vert\vert c\vert c...
+...times 7=7 &amp; 0.11 &amp; 1.00 &amp; 7 &amp; 0.11 &amp; 1.00  \hline
+\end{array}\end{displaymath}">
+</DIV>
+<BR CLEAR="ALL">
+<P></P>
+
+<P>
+<IMG
+ ALIGN="BOTTOM" BORDER="0" SRC="../equalize2.gif"
+ ALT="equalize2.gif">
+
+<P>
+In the following example, the histogram of a given image is equalized.
+Although the resulting histogram may not look constant, but the
+cumulative histogram is a exact linear ramp indicating that the density
+histogram is indeed equalized. The density histogram is not guaranteed to 
+be a constant because the pixels of the same gray level cannot be separated
+to satisfy a constant distribution.
+
+<P>
+<IMG
+ ALIGN="BOTTOM" BORDER="0" SRC="../figures/Paolina_256_hist.gif"
+ ALT="Paolina_256_hist.gif">
+<IMG
+ ALIGN="BOTTOM" BORDER="0" SRC="../figures/Paolina_256_hist_eq.gif"
+ ALT="Paolina_256_hist_eq.gif">
+
+<P>
+<B>Example:</B>
+
+<P>
+<IMG
+ ALIGN="BOTTOM" BORDER="0" SRC="../figures/HistogramEQ.gif"
+ ALT="HistogramEQ.gif">
+
+<P>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html26"
+  HREF="node3.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/opt/local/share/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html24"
+  HREF="contrast_transform.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/opt/local/share/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html18"
+  HREF="node1.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/opt/local/share/lib/latex2html/icons/prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html27"
+  HREF="node3.html">Histogram Specification</A>
+<B> Up:</B> <A NAME="tex2html25"
+  HREF="contrast_transform.html">contrast_transform</A>
+<B> Previous:</B> <A NAME="tex2html19"
+  HREF="node1.html">Gray level mapping</A>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Ruye Wang
+2016-09-29
+</ADDRESS>
+</BODY>
+</HTML>
