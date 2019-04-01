@@ -1,0 +1,4 @@
+pandas
+stop-words
+bs4
+scikit-learn===0.19.2
